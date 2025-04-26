@@ -71,6 +71,8 @@ void iniciarNovoJogo(int dificuldade) {
         if (venceu) {
             printf("\nParabéns! Você acertou a palavra secreta: %s\n", palavraSecreta);
             extern int pontuacao;
+            extern int vitorias;
+            vitorias++;
             pontuacao += 10;
             return;
         }
@@ -79,6 +81,8 @@ void iniciarNovoJogo(int dificuldade) {
     // Se o jogador não venceu
     if (!venceu) {
         printf("\nQue pena! Você perdeu. A palavra secreta era: %s\n", palavraSecreta);
+        extern int derrotas;
+        derrotas++;
     }
 }    
 
@@ -190,6 +194,8 @@ void iniciarNovoJogoComPalavra(char* palavraSecreta) {
         if (venceu) {
             printf("\nParabéns! Você acertou a palavra secreta: %s\n", palavraSecreta);
             extern int pontuacao;
+            extern int vitorias;
+            vitorias++;
             pontuacao += 10;
             return;
         }
@@ -197,5 +203,7 @@ void iniciarNovoJogoComPalavra(char* palavraSecreta) {
 
     if (!venceu) {
         printf("\nQue pena! Você perdeu. A palavra secreta era: %s\n", palavraSecreta);
+        extern int derrotas;
+        derrotas++;
     }
 }

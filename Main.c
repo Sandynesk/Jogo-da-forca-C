@@ -3,21 +3,31 @@
 #include <time.h>
 #include <stdbool.h>
 #include <string.h>
+#include <locale.h>
+#include <windows.h>
+
 
 #include "jogo.h"
 #include "util.h"
 
 // Para rodar o jogo: gcc main.c util.c jogo.c -o jogogcc main.c util.c jogo.c -o jogo
-
 // ./jogo
-int pontuacao = 0; 
+
+// Pra rodar em no cmd:
+// gcc main.c util.c jogo.c -o jogo -finput-charset=UTF-8 -fexec-charset=UTF-8  
+// jogo.exe
+
+int pontuacao = 0, vitorias = 0, derrotas = 0; 
 char palavraSecretaPersonalizada[TAMANHO_MAX] = ""; // Palavra secreta definida pelo usuário
 
 
 int main() {
 
     
-    setlocale(LC_ALL, "");
+    SetConsoleOutputCP(65001);
+    SetConsoleCP(65001);
+    setlocale(LC_ALL, "pt_BR.UTF-8");
+
 
     int opcao;
     bool executando = true;

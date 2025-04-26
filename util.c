@@ -4,7 +4,7 @@
 
 void exibirMenu() {
     printf("╔═══════════════════════╗\n");
-    printf("║ Bem-vindo ao jogo! ⚔️ ║\n");
+    printf("║ Bem-vindo ao jogo! ⚔️  ║\n");
     printf("╚═══════════════════════╝\n");
     
 
@@ -44,6 +44,6 @@ int escolherDificuldade() {
 }
 
 void exibirPontuacao() {
-    extern int pontuacao;
-    printf("Sua pontuação atual é: %d\n", pontuacao);
+    extern int pontuacao, vitorias, derrotas;
+    printf("Sua pontuação atual é: %d\nVocê tem %d vitorias e %d derrotas\n", pontuacao, vitorias, derrotas);
 }
