@@ -77,3 +77,17 @@ Para exibir corretamente caracteres especiais ou desenhos:
 
 ```bash
 chcp 65001
+```
+
+Certifique-se de que o terminal e o editor de texto estão configurados para UTF-8.
+
+## 🎉 Divirta-se!
+Agora você está pronto para jogar!
+Boa sorte na tentativa de salvar o bonequinho e acertar a palavra secreta! 🎮😊
+
+## 📌 Autor
+Desenvolvido por: Emanuel Sales
+Repositório: Jogo-da-Forca-C
+
+📋 Status do Projeto
+✅ Finalizado — Melhorias futuras podem ser adicionadas!
