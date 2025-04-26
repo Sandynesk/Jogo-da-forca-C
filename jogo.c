@@ -161,28 +161,39 @@ void iniciarNovoJogoComPalavra(char* palavraSecreta) {
         printf("\nLetras erradas: %s\n", letrasErradas);
         printf("Tentativas restantes: %d\n", 6 - tentativasErradas);
 
-        // Entrada e validação
-        do {
-            printf("\nDigite uma letra: ");
-            scanf(" %c", &letra);
-            if (!validarEntrada(letra)) {
-                printf("Entrada inválida! Por favor, digite apenas letras.\n");
-            }
-        } while (!validarEntrada(letra));
+        // Entrada do jogador
+        printf("\nDigite uma letra ou '!' para pedir uma dica: ");
+        scanf(" %c", &letra);
 
-        if (strchr(palavraSecreta, letra) != NULL) {
-            if (strchr(letrasAcertadas, letra) == NULL) {
-                strncat(letrasAcertadas, &letra, 1);
-                printf("Boa! A letra '%c' está correta!\n", letra);
-            }
-        } else {
-            if (strchr(letrasErradas, letra) == NULL) {
-                strncat(letrasErradas, &letra, 1);
-                tentativasErradas++;
-                printf("Ops! A letra '%c' está errada.\n", letra);
-            }
+        // Se o jogador solicitar uma dica
+        if (letra == '!') {
+            fornecerDica(palavraSecreta, letrasAcertadas);
+            continue; // Pula para a próxima iteração do loop
         }
 
+        // Validação da entrada
+        if (!validarEntrada(letra)) {
+            printf("Entrada inválida! Por favor, digite apenas letras.\n");
+            continue; // Pede nova entrada sem penalizar o jogador
+        }
+
+        // Verificar se a letra já foi usada
+        if (strchr(letrasAcertadas, letra) != NULL || strchr(letrasErradas, letra) != NULL) {
+            printf("Você já tentou a letra '%c'. Tente outra.\n", letra);
+            continue; // Evita penalizar novamente o jogador
+        }
+
+        // Verificar se a letra está na palavra secreta
+        if (strchr(palavraSecreta, letra) != NULL) {
+            strncat(letrasAcertadas, &letra, 1);
+            printf("Boa! A letra '%c' está correta!\n", letra);
+        } else {
+            strncat(letrasErradas, &letra, 1);
+            tentativasErradas++;
+            printf("Ops! A letra '%c' está errada.\n", letra);
+        }
+
+        // Verificar vitória
         venceu = true;
         for (int i = 0; i < strlen(palavraSecreta); i++) {
             if (strchr(letrasAcertadas, palavraSecreta[i]) == NULL) {
@@ -212,20 +223,21 @@ void fornecerDica(char* palavraSecreta, char* letrasAcertadas) {
     int tamanho = strlen(palavraSecreta);
     char letraDica = '\0';
 
-    srand(time(NULL)); // Para gerar dicas aleatórias
-
-    // Procurar uma letra que ainda não tenha sido descoberta
+    // Percorrer todas as letras da palavra
     for (int i = 0; i < tamanho; i++) {
-        char tentativa = palavraSecreta[rand() % tamanho];
+        char tentativa = palavraSecreta[i];
+        // Verifica se a letra ainda não foi acertada
         if (strchr(letrasAcertadas, tentativa) == NULL) {
             letraDica = tentativa;
             break;
         }
     }
 
+    // Exibir a dica ou mensagem de que não há mais dicas
     if (letraDica != '\0') {
         printf("Dica: A palavra contém a letra '%c'.\n", letraDica);
     } else {
-        printf("Você já descobriu todas as letras possíveis para esta dica!\n");
+        printf("Todas as possíveis dicas já foram dadas!\n");
     }
 }
+
