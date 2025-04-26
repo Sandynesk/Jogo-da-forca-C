@@ -9,7 +9,7 @@ void exibirMenu() {
     
 
     printf("\n===== Menu Inicial =====\n");
-    printf("1. Iniciar novo jogo (palavra aleatória)\n");
+    printf("1. Iniciar novo jogo\n");
     printf("2. Inserir palavra secreta\n");
     printf("3. Escolher dificuldade\n");
     printf("4. Exibir pontuação\n");

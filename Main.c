@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <stdbool.h>
-#include <locale.h>
+#include <string.h>
+
 #include "jogo.h"
 #include "util.h"
 
@@ -26,24 +29,36 @@ int main() {
 
         switch (opcao) {
             case 1:
-                printf("\nIniciando novo jogo...\n");
-                iniciarNovoJogo(escolherDificuldade());
+                if (strlen(palavraSecretaPersonalizada) > 0) { // Palavra personalizada foi definida
+                    printf("\nIniciando novo jogo com a palavra secreta inserida...\n");
+                    iniciarNovoJogoComPalavra(palavraSecretaPersonalizada);
+                } else {
+                    printf("\nIniciando novo jogo com palavra aleatória...\n");
+                    iniciarNovoJogo(escolherDificuldade());
+                }
                 break;
             case 2:
+                printf("\nDigite a palavra secreta: ");
+                scanf("%s", palavraSecretaPersonalizada); // Captura a palavra personalizada
+                printf("Palavra secreta definida com sucesso!\n");
+                break;
+            case 3:
                 printf("\nEscolher dificuldade...\n");
                 escolherDificuldade();
                 break;
-            case 3:
+            case 4:
                 printf("\nExibindo pontuação...\n");
                 exibirPontuacao();
                 break;
-            case 4:
+            case 5:
                 printf("\nSaindo do jogo...\n");
                 executando = false;
                 break;
             default:
                 printf("\nOpção inválida! Tente novamente.\n");
                 break;
+        
+        
         }
     }
 

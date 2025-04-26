@@ -5,6 +5,7 @@
 #define TAMANHO_MAX 50
 
 void iniciarNovoJogo(int dificuldade);
+void iniciarNovoJogoComPalavra(char* palavraSecreta); 
 bool validarEntrada(char letra);
 char* escolherPalavraAleatoria(int dificuldade);
 void exibirForca(int tentativasErradas);

@@ -136,3 +136,66 @@ void exibirForca(int tentativasErradas) {
     }
 }
 
+
+void iniciarNovoJogoComPalavra(char* palavraSecreta) {
+    char letrasAcertadas[TAMANHO_MAX] = "";
+    char letrasErradas[TAMANHO_MAX] = "";
+    int tentativasErradas = 0;
+    char letra;
+    bool venceu = false;
+
+    while (tentativasErradas < 6) {
+        printf("\nProgresso: ");
+        for (int i = 0; i < strlen(palavraSecreta); i++) {
+            if (strchr(letrasAcertadas, palavraSecreta[i]) != NULL) {
+                printf("%c ", palavraSecreta[i]);
+            } else {
+                printf("_ ");
+            }
+        }
+
+        exibirForca(tentativasErradas);
+        printf("\nLetras erradas: %s\n", letrasErradas);
+        printf("Tentativas restantes: %d\n", 6 - tentativasErradas);
+
+        // Entrada e validação
+        do {
+            printf("\nDigite uma letra: ");
+            scanf(" %c", &letra);
+            if (!validarEntrada(letra)) {
+                printf("Entrada inválida! Por favor, digite apenas letras.\n");
+            }
+        } while (!validarEntrada(letra));
+
+        if (strchr(palavraSecreta, letra) != NULL) {
+            if (strchr(letrasAcertadas, letra) == NULL) {
+                strncat(letrasAcertadas, &letra, 1);
+                printf("Boa! A letra '%c' está correta!\n", letra);
+            }
+        } else {
+            if (strchr(letrasErradas, letra) == NULL) {
+                strncat(letrasErradas, &letra, 1);
+                tentativasErradas++;
+                printf("Ops! A letra '%c' está errada.\n", letra);
+            }
+        }
+
+        venceu = true;
+        for (int i = 0; i < strlen(palavraSecreta); i++) {
+            if (strchr(letrasAcertadas, palavraSecreta[i]) == NULL) {
+                venceu = false;
+                break;
+            }
+        }
+        if (venceu) {
+            printf("\nParabéns! Você acertou a palavra secreta: %s\n", palavraSecreta);
+            extern int pontuacao;
+            pontuacao += 10;
+            return;
+        }
+    }
+
+    if (!venceu) {
+        printf("\nQue pena! Você perdeu. A palavra secreta era: %s\n", palavraSecreta);
+    }
+}
