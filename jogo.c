@@ -3,6 +3,7 @@
 #include <time.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 #include "jogo.h"
 
 void iniciarNovoJogo(int dificuldade) {
@@ -28,8 +29,9 @@ void iniciarNovoJogo(int dificuldade) {
         printf("Tentativas restantes: %d\n", 6 - tentativasErradas);
     
         // Entrada do usuário
-        printf("\nDigite uma letra ou '!' para pedir uma dica: ");
+        printf("\nDigite uma letra (sem acento ou cedilha) ou '!' para pedir uma dica: ");
         scanf(" %c", &letra);
+        letra = toupper(letra);
     
         // Se o jogador solicitar uma dica
         if (letra == '!') {
@@ -87,12 +89,12 @@ void iniciarNovoJogo(int dificuldade) {
 
 bool validarEntrada(char letra) {
     return ((letra >= 'a' && letra <= 'z') || (letra >= 'A' && letra <= 'Z'));
-}
+} 
 
-char* escolherPalavraAleatoria(int dificuldade) {
-    char* palavrasFaceis[MAX_PALAVRAS] = {"uva", "maça", "pêra", "kiwi", "lima"};
-    char* palavrasMedias[MAX_PALAVRAS] = {"banana", "manga", "laranja", "morango", "ameixa"};
-    char* palavrasDificeis[MAX_PALAVRAS] = {"abacaxi", "carambola", "jabuticaba", "framboesa", "tamarindo"};
+char* escolherPalavraAleatoria(int dificuldade) {  // Insira aqui as palavras na lista sem cedilha nem acento
+    char* palavrasFaceis[MAX_PALAVRAS] = {"UVA", "MACA", "PERA", "KIWI", "LIMA"};
+    char* palavrasMedias[MAX_PALAVRAS] = {"BANANA", "MANGA", "LARANJA", "MORANGO", "AMEIXA"};
+    char* palavrasDificeis[MAX_PALAVRAS] = {"ABACAXI", "CARAMBOLA", "JABUTICABA", "FRAMBOESA", "TAMARINDO"};
 
     srand(time(NULL));
     int indice = rand() % MAX_PALAVRAS;

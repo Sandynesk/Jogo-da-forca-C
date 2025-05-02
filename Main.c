@@ -4,13 +4,10 @@
 #include <stdbool.h>
 #include <string.h>
 #include <locale.h>
-#include <windows.h>
-
-
 #include "jogo.h"
 #include "util.h"
 
-// Para rodar o jogo: gcc main.c util.c jogo.c -o jogogcc main.c util.c jogo.c -o jogo
+// Para rodar o jogo: gcc Main.c util.c jogo.c -o jogo
 // ./jogo
 
 // Pra rodar em no cmd:
@@ -24,8 +21,8 @@ char palavraSecretaPersonalizada[TAMANHO_MAX] = ""; // Palavra secreta definida 
 int main() {
 
     
-    SetConsoleOutputCP(65001);
-    SetConsoleCP(65001);
+    //SetConsoleOutputCP(65001);
+    //SetConsoleCP(65001);
     setlocale(LC_ALL, "pt_BR.UTF-8");
 
 
@@ -48,20 +45,20 @@ int main() {
                 }
                 break;
             case 2:
-                printf("\nDigite a palavra secreta: ");
+                printf("\nDigite a palavra secreta usando apenas letras e vogais, sem acentos ou cedilha:\n");
                 scanf("%s", palavraSecretaPersonalizada); // Captura a palavra personalizada
                 printf("Palavra secreta definida com sucesso!\n");
                 break;
             case 3:
-                printf("\nEscolher dificuldade...\n");
+                printf("\nQual é a dificuldade que deseja?\n");
                 escolherDificuldade();
                 break;
             case 4:
-                printf("\nExibindo pontuação...\n");
+                printf("\nPontuação é de:\n");
                 exibirPontuacao();
                 break;
             case 5:
-                printf("\nSaindo do jogo...\n");
+                printf("\nObrigado por jogar e até a próxima!\n");
                 executando = false;
                 break;
             default:
